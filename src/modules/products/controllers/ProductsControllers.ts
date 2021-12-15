@@ -57,9 +57,9 @@ export default class ProductsController {
   public async delete(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
 
-    const deleProduct = new DeleteProductService();
+    const deleteProduct = new DeleteProductService();
 
-    await deleProduct.execute({ id });
+    await deleteProduct.execute({ id });
 
     return res.json([]);
   }
