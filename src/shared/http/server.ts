@@ -16,6 +16,7 @@ app.use(routes);
 
 app.use(errors());
 
+//midleware de rotemaneto de erros
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   if (error instanceof AppError) {
     return res.status(error.statusCode).json({
