@@ -18,7 +18,7 @@ class User {
   email: string;
 
   @Column()
-  senha: string;
+  password: string;
 
   @Column()
   avatar: string;
