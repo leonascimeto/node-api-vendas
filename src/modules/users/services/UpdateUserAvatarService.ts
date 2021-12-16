@@ -20,11 +20,12 @@ class UpdateUserAvatarService {
     if (!user) {
       throw new AppError('User not found.');
     }
-
+    //verificar se já existe um avatar criado
     if (user.avatar) {
       const userAvatarFilePath = path.join(uploadConfig.directory, user.avatar);
       const userAvatarFileExists = await fs.promises.stat(userAvatarFilePath);
-
+      //se existir avatar - deletar o arquivo
+      //para que não tenha mais de uma imagem
       if (userAvatarFileExists) {
         await fs.promises.unlink(userAvatarFilePath);
       }
