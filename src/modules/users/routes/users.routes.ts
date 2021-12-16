@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import { celebrate, Joi, Segments } from 'celebrate';
-import UserControllers from '../controllers/UserControllers';
+import UserController from '../controllers/UserController';
 
 const usersRouter = Router();
-const usersControllers = new UserControllers();
+const usersController = new UserController();
 
-usersRouter.get('/', usersControllers.index);
+usersRouter.get('/', usersController.index);
 
 usersRouter.post(
   '/',
@@ -16,7 +16,7 @@ usersRouter.post(
       password: Joi.string().required(),
     },
   }),
-  usersControllers.create,
+  usersController.create,
 );
 
 export default usersRouter;
