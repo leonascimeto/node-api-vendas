@@ -17,7 +17,7 @@ productsRouter.get(
   productsController.show,
 );
 
-productsRouter.post(
+productsRouter.put(
   '/',
   celebrate({
     [Segments.BODY]: {
@@ -29,10 +29,10 @@ productsRouter.post(
       id: Joi.string().uuid().required(),
     },
   }),
-  productsController.create,
+  productsController.update,
 );
 
-productsRouter.put(
+productsRouter.post(
   '/:id',
   celebrate({
     [Segments.BODY]: {
@@ -41,7 +41,7 @@ productsRouter.put(
       quantity: Joi.number().required(),
     },
   }),
-  productsController.update,
+  productsController.create,
 );
 
 productsRouter.delete(
