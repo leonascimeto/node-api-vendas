@@ -18,7 +18,7 @@ productsRouter.get(
 );
 
 productsRouter.put(
-  '/',
+  '/:id',
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
@@ -33,7 +33,7 @@ productsRouter.put(
 );
 
 productsRouter.post(
-  '/:id',
+  '/',
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
