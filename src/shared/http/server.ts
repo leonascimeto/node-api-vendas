@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
+import { pagination } from 'typeorm-pagination';
 import cors from 'cors';
 import { errors } from 'celebrate';
 import routes from './routes';
@@ -9,6 +10,7 @@ import '@shared/typeorm';
 import uploadConfig from '@config/upload';
 
 const app = express();
+app.use(pagination);
 
 app.use(cors());
 app.use(express.json());
