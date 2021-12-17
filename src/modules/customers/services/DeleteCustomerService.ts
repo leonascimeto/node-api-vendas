@@ -6,7 +6,7 @@ interface IRequest {
   id: string;
 }
 
-class DeleteUserService {
+class DeleteCustomerService {
   public async execute({ id }: IRequest): Promise<void> {
     const customerRepository = getCustomRepository(CustomersRepository);
 
@@ -20,4 +20,4 @@ class DeleteUserService {
   }
 }
 
-export default DeleteUserService;
+export default DeleteCustomerService;
