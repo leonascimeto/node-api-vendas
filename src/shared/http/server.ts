@@ -20,7 +20,6 @@ app.use(rateLimiter);
 app.use(pagination);
 app.use('/files', express.static(uploadConfig.directory));
 app.use(routes);
-
 app.use(errors());
 
 //midleware de rotemaneto de erros
@@ -31,6 +30,8 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
       message: error.message,
     });
   }
+
+  console.log('flag: ', error);
 
   return res.status(500).json({
     status: 'error',

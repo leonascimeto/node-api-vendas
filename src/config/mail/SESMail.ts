@@ -1,5 +1,7 @@
 import nodemailer from 'nodemailer';
 import handlebarsMailTemplate from './HandlebarsMailTemplate';
+import aws from 'aws-sdk';
+import mailConfig from '@config/mail/mail';
 
 interface ITemplateVariables {
   [key: string]: string | number;
@@ -22,33 +24,27 @@ interface ISendMail {
   templateData: IParseMailTemplate;
 }
 
-export default class EtherealMail {
+export default class SESMail {
   static async sendMail({
     to,
     from,
     subject,
     templateData,
   }: ISendMail): Promise<void> {
-    const account = await nodemailer.createTestAccount();
     const mailTemplate = new handlebarsMailTemplate();
 
     const trasnporte = nodemailer.createTransport({
-      host: account.smtp.host,
-      port: account.smtp.port,
-      secure: account.smtp.secure,
-      auth: {
-        user: account.user,
-        pass: account.pass,
-      },
-      tls: {
-        rejectUnauthorized: false,
-      },
+      SES: new aws.SES({
+        apiVersion: '2010-12-01',
+      }),
     });
+
+    const { email, name } = mailConfig.defaults.from;
 
     const message = await trasnporte.sendMail({
       from: {
-        name: from?.name || 'Equipe API Vendas',
-        address: from?.email || 'equipe@apivendas.com.br',
+        name: from?.name || name,
+        address: from?.email || email,
       },
       to: {
         name: to.name,
